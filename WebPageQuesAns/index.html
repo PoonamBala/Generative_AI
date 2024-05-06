@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage Question Answering UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Webpage Question Answering</h1>
+    <form id="qaForm">
+        <label for="url">Webpage URL:</label><br>
+        <input type="text" id="url" name="url" required><br>
+        <label for="question">Question:</label><br>
+        <input type="text" id="question" name="question" required><br>
+        <button type="submit">Get Answer</button>
+    </form>
+    <div id="answer"></div>
+
+    <script>
+        const form = document.getElementById('qaForm');
+        const answerDiv = document.getElementById('answer');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const url = document.getElementById('url').value;
+            const question = document.getElementById('question').value;
+
+            try {
+                const response = await fetch('/answer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        url: url,
+                        question: question
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch answer');
+                }
+
+                const data = await response.json();
+                answerDiv.innerHTML = `<strong>Answer:</strong> ${data.answer}`;
+            } catch (error) {
+                answerDiv.innerHTML = `<strong>Error:</strong> ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
