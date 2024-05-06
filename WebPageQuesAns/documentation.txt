@@ -1,0 +1,14 @@
+API Usage:
+The API endpoint is used for user authentication. Users can authenticate by sending a POST request with their username and password. After successful authentication, users can access the /answer endpoint by sending a POST request with JSON data containing the URL of the webpage and the question they want to ask. The API responds with the answer to the question extracted from the webpage content.
+
+Authentication:
+Authentication is implemented using basic authentication over HTTPS. Users must provide their username and password in the request headers when accessing the /login endpoint. The credentials are validated with users dictionary. If the credentials are valid, access provided to /answer endpoint.
+
+Input Processing:
+Input is processed in JSON format containing the URL of the webpage (url) and the question to ask (question). If the input is valid, the API extracts the text content of the webpage using BeautifulSoup and truncates it to a maximum of 5,000 characters as sample.
+
+Response Generation:
+The response generation process involves using a pre-trained question-answering model from the Hugging Face Transformers library. The model processes the input question and relevant webpage content to generate an answer.
+
+Deployment Instructions:
+To deploy the API, ensure you have Python installed on your system. Install the required dependencies by running pip install Flask requests beautifulsoup4 transformers. Copy the provided code into a Python file (e.g., app.py). Run the Python file using python app.py. This will start the Flask development server. API will be accessible locally at http://127.0.0.1:5000.
