@@ -1,0 +1,15 @@
+API Usage:
+
+To utilize the API, you need to interact with various endpoints for different functionalities. First, to access the system, you must log in by sending a POST request to the /login route with the appropriate username and password provided in the form data. Once authenticated, you can perform actions like generating text. This involves sending a POST request to the /generate_text endpoint with JSON data containing the desired topic and format. Additionally, to log out and terminate the session, a GET request is sent to the /logout route.
+
+Authentication:
+The authentication mechanism ensures that only authorized users can access certain functionalities of the system. When a user attempts to log in, the system verifies the provided credentials against a predefined dictionary of users. If the authentication is successful, a session is established, allowing the user to access protected routes. However, if the credentials are incorrect or unauthorized, the user is prompted with an error message.
+
+Input Processing:
+Input processing involves handling the data provided by the user to execute the desired actions. In this case, the system expects JSON data containing the topic and format when generating text. Upon receiving the input, the system extracts the necessary information and prepares it for further processing.
+
+Response Generation:
+The response generation component generates the desired output based on the processed input. After receiving the topic and format, the system utilizes the OpenAI API to generate text accordingly. Once the text generation process is complete, the system constructs a JSON response containing the generated text and sends it back to the user.
+
+Deployment Instructions:
+To deploy the system, follow a series of steps to ensure proper setup and functionality. Begin by installing the required dependencies, such as Flask and the OpenAI Python packages. Next, set up your OpenAI API key and Flask secret key within the system's codebase. Then, save the code in a Python file and run the Flask application. Access the API endpoints using appropriate HTTP requests for testing and development purposes. Finally, deploy the Flask application to your chosen hosting platform for production use, ensuring scalability and reliability.
